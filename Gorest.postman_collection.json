@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "d2a60e2b-73ff-482e-8a81-8e6c3b5eb75c",
+		"name": "Gorest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "872159",
+		"_collection_link": "https://www.postman.com/carolinaqatest/workspace/api-gorest/collection/872159-d2a60e2b-73ff-482e-8a81-8e6c3b5eb75c?action=share&source=collection_link&creator=872159"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "DeletarUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status da resposta deve ser 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{apiKey}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{pathUsers}}/5224612",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{pathUsers}}",
+								"5224612"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Teste para verificar se o status da resposta é 200 OK",
+									"pm.test(\"Status da resposta deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Teste para verificar se a resposta é um JSON válido",
+									"pm.test(\"A resposta deve ser um JSON válido\", function () {",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"// Teste para verificar se os dados foram atualizados corretamente",
+									"pm.test(\"Os dados do usuário devem ser atualizados corretamente\", function () {",
+									"    // Substitua os campos e valores conforme necessário",
+									"    pm.expect(pm.response.json().name).to.eq('Carolina Teste\"');",
+									"    //pm.expect(pm.response.json().email).to.eql('sucheta_tagore_rev@abernathy.test');",
+									"});",
+									"",
+									"// Teste para verificar se o tempo de resposta está abaixo de um limite específico (por exemplo, 500 ms)",
+									"pm.test(\"O tempo de resposta deve ser inferior a 600 ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{apiKey}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n        \"id\": 5223923,\n        \"name\": \"Carolina Teste\",\n        \"email\": \"sucheta_tagore_rev@abernathy.test\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/{{pathUsers}}/5223923",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{pathUsers}}",
+								"5223923"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarTodosUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//teste de status da resposta",
+									"pm.test(\"Status da resposta deve ser 200 ok\", function(){",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"//teste para verificar se a resposta é JSON ",
+									"pm.test(\"A resposta deve ser JSON\", function() {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\")",
+									"})",
+									"// Teste para verificar se a resposta não está vazia",
+									"pm.test(\"A resposta não deve estar vazia\", function () {",
+									"    pm.response.to.not.be.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{apiKey}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{pathUsers}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{pathUsers}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Teste para verificar se o status da resposta é 201 Created",
+									"pm.test(\"Status da resposta deve ser 201 Created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"// Teste para verificar se a resposta é um JSON válido",
+									"pm.test(\"A resposta deve ser um JSON válido\", function () {",
+									"    pm.response.to.be.json;",
+									"});",
+									"// Teste para verificar o cabeçalho Content-Type",
+									"pm.test(\"O cabeçalho Content-Type deve ser 'application/json'\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");",
+									"});",
+									"",
+									"// Teste para verificar se a resposta contém um campo 'name' não vazio",
+									"pm.test(\"A resposta deve conter um campo 'mensagem'\", function () {",
+									"    pm.expect(pm.response.json()).to.have.property('name').that.is.not.empty;",
+									"});",
+									"",
+									"// Teste para verificar se a resposta contém um campo 'nome' com o valor correto",
+									"pm.test(\"O campo 'nome' na resposta deve ser igual a 'John Doe'\", function () {",
+									"    pm.expect(pm.response.json().name).to.eql('Tenali Ramakrishna');",
+									"});",
+									"",
+									"// Teste para verificar se o tempo de resposta está abaixo de um limite específico (por exemplo, 500 ms)",
+									"pm.test(\"O tempo de resposta deve ser inferior a 600 ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{apiKey}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer b7bdc0485c1046c5906b92d052bd56f906a9e3120ccfc9c80682958325668fb3"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Tenali Ramakrishna\", \"gender\":\"male\", \"email\":\"teste@teste5.com.br\", \"status\":\"active\"}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/{{pathUsers}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{pathUsers}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarPorIdUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status da resposta deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{apiKey}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{pathUsers}}/5223923",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{pathUsers}}",
+								"5223923"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
