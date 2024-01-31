@@ -1,0 +1,468 @@
+{
+	"info": {
+		"_postman_id": "d2a60e2b-73ff-482e-8a81-8e6c3b5eb75c",
+		"name": "Gorest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "DeletarUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a1a60bf-4e3a-493a-965a-4c40fa75179f",
+								"exec": [
+									"pm.test(\"Status da resposta deve ser 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "e7e9bc40-0ce6-45c4-80b5-95140d122218",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{apiKey}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseURL}}/{{pathUsers}}/5224612"
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d728d802-ba0b-4b32-a9e7-2bce2f97eb36",
+								"exec": [
+									"// Teste para verificar se o status da resposta é 200 OK",
+									"pm.test(\"Status da resposta deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Teste para verificar se a resposta é um JSON válido",
+									"pm.test(\"A resposta deve ser um JSON válido\", function () {",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"// Teste para verificar se os dados foram atualizados corretamente",
+									"pm.test(\"Os dados do usuário devem ser atualizados corretamente\", function () {",
+									"    // Substitua os campos e valores conforme necessário",
+									"    pm.expect(pm.response.json().name).to.eq('Carolina Teste\"');",
+									"    //pm.expect(pm.response.json().email).to.eql('sucheta_tagore_rev@abernathy.test');",
+									"});",
+									"",
+									"// Teste para verificar se o tempo de resposta está abaixo de um limite específico (por exemplo, 500 ms)",
+									"pm.test(\"O tempo de resposta deve ser inferior a 600 ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "df8cf00c-8cbf-4299-90ec-0f34b510dcd2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{apiKey}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n        \"id\": 5223923,\n        \"name\": \"Carolina Teste\",\n        \"email\": \"sucheta_tagore_rev@abernathy.test\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/{{pathUsers}}/5223923"
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarTodosUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ebe7d078-a34a-4b54-b3f4-a364e983cd55",
+								"exec": [
+									"//teste de status da resposta",
+									"//validando Codigo de status(Status code)",
+									"pm.test(\"Status da resposta deve ser 200 ok\", function(){",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"//Validando Headers",
+									"pm.test(\"A resposta deve ser JSON\", function() {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\")",
+									"})",
+									"//Validando Conteúdo JSON",
+									"pm.test(\"A resposta é um JSON válido\", function () {",
+									"    pm.response.to.have.jsonBody();",
+									"});",
+									"// Teste para verificar se a resposta não está vazia",
+									"pm.test(\"A resposta não deve estar vazia\", function () {",
+									"    pm.response.to.not.be.empty;",
+									"});",
+									"//Validando Campos Específicos no JSON",
+									"pm.test(\"O campo 'name' está presente na resposta\", function () {",
+									"    pm.response.to.have.jsonBody('name');",
+									"});",
+									"//Validando Valores Específicos",
+									"pm.test(\"O ID do usuário é 1\", function () {",
+									"    pm.expect(pm.response.json().data.id).to.eql(6129733);",
+									"});",
+									"//Validando Tamanho de Listas ou Arrays",
+									"pm.test(\"A lista de usuários contém pelo menos 5 usuários\", function () {",
+									"    pm.expect(pm.response.json()).to.have.lengthOf.above(4);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "fcf8cd33-05bc-4dae-9aae-cb131c8e02ef",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{apiKey}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{baseURL}}/{{pathUsers}}"
+					},
+					"response": []
+				},
+				{
+					"name": "CriarUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "72151b1d-999e-4897-9001-64286c6a0544",
+								"exec": [
+									"// Teste para verificar se o status da resposta é 201 Created",
+									"pm.test(\"Status da resposta deve ser 201 Created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"// Teste para verificar se a resposta é um JSON válido",
+									"pm.test(\"A resposta deve ser um JSON válido\", function () {",
+									"    pm.response.to.be.jsonBody();",
+									"});",
+									"// Validar o cabeçalho Content-Type",
+									"pm.test(\"O cabeçalho Content-Type deve ser 'application/json'\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");",
+									"});",
+									"",
+									"// Teste para verificar se a resposta contém um campo 'name' não vazio",
+									"pm.test(\"A resposta deve conter um campo 'mensagem'\", function () {",
+									"    pm.expect(pm.response.json()).to.have.property('name').that.is.not.empty;",
+									"});",
+									"",
+									"//Validando Valores Específicos",
+									"pm.test(\"O ID do novo usuário é 6132276\", function () {",
+									"    pm.expect(pm.response.json().id).to.eql(6132276);",
+									"});",
+									"",
+									"",
+									"// Teste para verificar se a resposta contém um campo 'nome' com o valor correto",
+									"pm.test(\"O campo 'nome' na resposta deve ser igual a 'John Doe'\", function () {",
+									"    pm.expect(pm.response.json().name).to.eql('Tenali Ramakrishna');",
+									"});",
+									"",
+									"// Teste para verificar se o tempo de resposta está abaixo de um limite específico (por exemplo, 500 ms)",
+									"pm.test(\"O tempo de resposta deve ser inferior a 2000 ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "5ce420cb-cf67-4506-a68a-f832ff824208",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{apiKey}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer b7bdc0485c1046c5906b92d052bd56f906a9e3120ccfc9c80682958325668fb3"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Tenali Ramakrishna\", \"gender\":\"male\", \"email\":\"teste@teste6.com.br\", \"status\":\"active\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/{{pathUsers}}"
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarPorIdUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6fced8f-e398-44bb-9426-524f2085cee9",
+								"exec": [
+									"//Fazendo uma Solicitação GET para obter detalhes do recurso",
+									"// Exemplo de uma solicitação GET para obter detalhes do usuário com ID 123",
+									"pm.sendRequest({",
+									"    url: 'https://gorest.co.in/public/v2/users/6132276',",
+									"    method: 'GET',",
+									"    header: 'Content-Type:application/json; charset=utf-8',",
+									"}, function (err, response) {",
+									"    pm.environment.set('userDetails', response.json());",
+									"});",
+									"",
+									"",
+									"//Validando Headers:",
+									"pm.test(\"O cabeçalho 'Content-Type' é 'application/json'\", function () {",
+									"    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8');",
+									"});",
+									"",
+									"//Validando Código de Status (Status Code):",
+									"pm.test(\"Status da resposta deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"//Validando Conteúdo JSON:",
+									"pm.test(\"A resposta é um JSON válido\", function () {",
+									"    pm.response.to.have.jsonBody();",
+									"});",
+									"//Validando Campos Específicos no JSON:",
+									"pm.test(\"O campo 'nome' está presente na resposta\", function () {",
+									"    pm.response.to.have.jsonBody('name');",
+									"});",
+									"",
+									"pm.test(\"O ID do usuário é 6132276\", function () {",
+									"    pm.expect(pm.response.json().id).to.eql(6132276);",
+									"});",
+									"//Validando com Base nos Detalhes Obtidos Anteriormente:",
+									"pm.test(\"O nome do usuário é válido\", function () {",
+									"    const userDetails = pm.environment.get('userDetails');",
+									"    pm.expect(userDetails.name).to.eql(\"Tenali Ramakrishna\");",
+									"});",
+									"//Validando Valores Específicos:",
+									"pm.test(\"O email do usuário é válido\", function () {",
+									"    const userDetails = pm.environment.get('userDetails');",
+									"    pm.expect(userDetails.email).to.eql(\"teste@teste6.com.br\");",
+									"});",
+									"//Validando Números ou Tipos de Dados:",
+									"pm.test(\"O campo 'name' é um string\", function () {",
+									"    const userDetails = pm.environment.get('userDetails');",
+									"    pm.expect(userDetails.name).to.be.a('string');",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "841f4f4e-678b-4ae0-8e39-a14ce2e1fdd7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{apiKey}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{baseURL}}/{{pathUsers}}/6132276"
+					},
+					"response": []
+				}
+			],
+			"id": "b5c722c6-28be-41ff-9452-d1dd444ca839"
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "BuscarTodosPosts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e197e5a2-abcb-4069-b151-6f882e8767db",
+								"exec": [
+									"// Solicitação GET para obter posts",
+									"pm.sendRequest({",
+									"    url: 'https://gorest.co.in/public-api/posts',",
+									"    method: 'GET',",
+									"    header: 'Content-Type:application/json',",
+									"}, function (err, response) {",
+									"    // Validando o código de status",
+									"    pm.test(\"Status code é 200 OK\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"",
+									"    // Validando se a resposta é um JSON válido",
+									"    pm.test(\"A resposta é um JSON válido\", function () {",
+									"        pm.response.to.have.jsonBody();",
+									"    });",
+									"",
+									"    // Validando se a resposta contém pelo menos um post",
+									"    pm.test(\"Pelo menos um post está presente na resposta\", function () {",
+									"        const posts = pm.response.json();",
+									"        pm.expect(posts.length).to.be.above(1);",
+									"    });",
+									"",
+									"    // Adicione mais validações conforme necessário",
+									"",
+									"    // Exemplo de validação de um campo específico em um post",
+									"    pm.test(\"O primeiro post tem um título\", function () {",
+									"        const posts = pm.response.json();",
+									"        pm.expect(posts[0].title).to.be.a('string');",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "ac347f7c-7c5f-46bc-986d-4566d2932d28",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseURL}}/{{pathPosts}}"
+					},
+					"response": []
+				},
+				{
+					"name": "CriarPosts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "79277a0a-4d6d-4eeb-9ffa-69791aac05c6",
+								"exec": [
+									"// Solicitação POST para criar um novo post",
+									"pm.sendRequest({",
+									"    url: 'https://gorest.co.in/public-api/posts',",
+									"    method: 'POST',",
+									"    header: 'Content-Type:application/json',",
+									"    body: {",
+									"        mode: 'raw',",
+									"        raw: JSON.stringify({",
+									"            title: \"Novo Post\",",
+									"            body: \"Conteúdo do novo post\",",
+									"            user_id: 6131459,  // Substitua pelo ID de usuário real",
+									"        }),",
+									"    },",
+									"}, function (err, response) {",
+									"    // Validando o código de status",
+									"    pm.test(\"Status code é 201 Created\", function () {",
+									"        pm.response.to.have.status(201);",
+									"    });",
+									"",
+									"    // Validando se a resposta é um JSON válido",
+									"    pm.test(\"A resposta é um JSON válido\", function () {",
+									"        pm.response.to.have.jsonBody();",
+									"    });",
+									"",
+									"    // Validando se o novo post foi criado com sucesso",
+									"    pm.test(\"O novo post foi criado com sucesso\", function () {",
+									"        const post = pm.response.json();",
+									"        pm.expect(post.title).to.eql(\"Novo Post\");",
+									"        pm.expect(post.body).to.eql(\"Conteúdo do novo post\");",
+									"        // Adicione mais validações conforme necessário",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f522d83d-8b1d-4222-b616-4f4eaf85a9e6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{apiKey}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n        \"user_id\": 6131459,\n        \"title\": \"Caelum anser concido ullus testimonium tollo.\",\n        \"body\": \"Curvo arguo terebro. Cumque repellendus absum. Tonsor coadunatio adaugeo. Spectaculum ustulo coadunatio. Trucido qui commemoro. Fugit aptus possimus. Soleo via alii. Thorax vigilo pauper. Magnam crudelis voluptas. Auctor comis voco. Denuncio sit tenus. Video blanditiis ea. Comes ulciscor conservo. Amet clibanus vere. Suspendo eveniet charisma. Caute ventosus consequatur. Vulgaris sed conqueror. Cognomen titulus cometes.\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/{{pathPosts}}"
+					},
+					"response": []
+				}
+			],
+			"id": "c933edaf-abd8-427a-a825-b0954f7fa43e"
+		}
+	]
+}
